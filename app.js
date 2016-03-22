@@ -1,3 +1,5 @@
+//  get access to all the necessary node modules
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,10 +7,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-// Database
+// get access to the Database
 var mongoClient = require('mongodb').MongoClient;
 var monk = require('monk');
-var db = monk('localhost:27017/lab9adv');
+var db = monk('localhost:27017/lab9adv');  // the path that mongod accessed to the db collection
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -33,7 +35,9 @@ app.use(function(req, res, next){
 	next();
 });
 
+// the application is going to access the root '/', which is index
 app.use('/', routes);
+// the application will also access /users for most interactivity
 app.use('/users', users);
 
 // catch 404 and forward to error handler
